@@ -94,7 +94,7 @@
     "prepare": "husky",
     "prepublishOnly": "npm run build",
     "test": "npm run lint && npm run test:vi",
-    "test:vi": "vitest run",
+    "test:vi": "vitest run --coverage",
     "update-sponsors": "tsx scripts/fetch-sponsors.mts"
   },
   "lint-staged": {
@@ -174,5 +174,13 @@
       "**/__tests__/*",
       "**/__snapshots__/*"
     ]
+  },
+  "vitest": {
+    "coverage": {
+      "reporter": [
+        "text",
+        "lcov"
+      ]
+    }
   }
 }
