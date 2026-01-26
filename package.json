@@ -95,6 +95,9 @@
     "prepublishOnly": "npm run build",
     "test": "npm run lint && npm run test:vi",
     "test:vi": "vitest run --coverage",
+    "test:clean": "rm -rf coverage",
+    "test:no-clean": "vitest run --coverage --coverage.clean=false",
+    "test:report": "vitest run --coverage --coverage.reportOnFailure",
     "update-sponsors": "tsx scripts/fetch-sponsors.mts"
   },
   "lint-staged": {
@@ -137,6 +140,7 @@
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
     "@vitest/coverage-v8": "^2.1.8",
+    "c8": "^7.14.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsdoc": "^50.6.6",
@@ -180,7 +184,9 @@
       "reporter": [
         "text",
         "lcov"
-      ]
+      ],
+      "provider": "v8",
+      "clean": true
     }
   }
 }
