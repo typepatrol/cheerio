@@ -95,9 +95,9 @@
     "prepublishOnly": "npm run build",
     "test": "npm run lint && npm run test:vi",
     "test:vi": "vitest run --coverage",
-    "test:clean": "rm -rf coverage",
-    "test:no-clean": "vitest run --coverage --coverage.clean=false",
-    "test:report": "vitest run --coverage --coverage.reportOnFailure",
+    "test:clean": "rm -rf coverage .nyc_output",
+    "test:no-clean": "vitest run --coverage --coverage.reportOnFailure || true; mkdir -p .nyc_output && cp coverage/coverage-final.json \".nyc_output/cov-$(date +%s%N).json\"",
+    "test:report": "nyc report --reporter=text --reporter=lcov --temp-dir .nyc_output",
     "update-sponsors": "tsx scripts/fetch-sponsors.mts"
   },
   "lint-staged": {
@@ -151,6 +151,7 @@
     "jquery": "^3.7.1",
     "jsdom": "^26.0.0",
     "lint-staged": "^15.4.3",
+    "nyc": "^17.1.0",
     "prettier": "^3.5.3",
     "prettier-plugin-jsdoc": "^1.3.2",
     "tinybench": "^3.1.1",
